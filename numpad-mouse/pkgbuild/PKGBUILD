@@ -1,0 +1,23 @@
+pkgname=numouse
+pkgver=0.2.0
+pkgrel=1
+pkgdesc='Drive the mouse pointer from the numeric keypad on Hyprland'
+arch=('x86_64' 'aarch64')
+license=('MIT')
+options=('!debug')
+depends=('qt6-base' 'wayland' 'libnotify')
+makedepends=('gcc' 'make' 'wayland')
+source=()
+sha256sums=()
+
+build() {
+  cd "$startdir/.."
+  ./bin/build
+}
+
+package() {
+  cd "$startdir/.."
+  install -Dm755 build/numouse "$pkgdir/usr/bin/numouse"
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+  install -Dm644 "$startdir/numouse.svg" "$pkgdir/usr/share/icons/hicolor/scalable/apps/numouse.svg"
+}
